@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Here is a totally not made-up article title',
+    date: 'Two days before the day after tomorrow',
+    firstParagraph: 'You might have guessed when this article was written',
+    secondParagraph: 'If you did, that is great!',
+    thirdParagraph: 'if you did not, there is always tomorrow...'
   }
 ];
 
@@ -112,3 +119,44 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArt(title, date, firstParagraph, secondParagraph, thirdParagraph){
+
+  const article = document.createElement('div');
+  const artTitle = document.createElement('h2');
+  const artDate = document.createElement('p');
+  const artP1 = document.createElement('p');
+  const artP2 = document.createElement('p');
+  const artP3 = document.createElement('p');
+  const expBtn = document.createElement('span');
+
+  article.append(artTitle);
+  article.append(artDate);
+  article.append(artP1);
+  article.append(artP2);
+  article.append(artP3);
+  article.append(expBtn);
+
+  article.classList.add('article');
+  artDate.classList.add('date');
+  expBtn.classList.add('expandButton');
+
+  artTitle.textContent = title;
+  artDate.textContent = date;
+  artP1.textContent = firstParagraph;
+  artP2.textContent = secondParagraph;
+  artP3.textContent = thirdParagraph;
+  expBtn.textContent = 'expand';
+
+  expBtn.addEventListener('click', event => {
+    article.classList.toggle('article-open');
+  });
+
+  return article;
+};
+
+const article = document.querySelector('.articles');
+
+data.map(data => {
+  article.appendChild(createArt(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph));
+});
